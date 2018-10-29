@@ -1,1 +1,21 @@
 //please add your test cases here.
+
+Frontend Test cases - (qa-exercise/automation/qa-exercise-test/frontend/TestRunner.java)
+Test 1 : Create task with Name=DemoTask, Category=None, DueDate=None
+Test 2 : Create task with Name=DemoTask2, Category=College, DueDate=None
+Test 3 : Create task with Name=DemoTask3, Category=Personal, DueDate=15/12/2018
+Test 4 : Find task with Name="Finish reading research papers"
+Test 5 : Verify task with Name=DemoTask2 is shown in green color as per its category.
+Test 6 : Verify task with Name=DemoTask is shown in default black color as per its category.
+Test 7 : Verify pending task with Name=DemoTask is shown as default text (not striked).
+Test 8 : Verify task with Name=DemoTask3 is shown with duedate=(15/12/18).
+Test 9 : Complete task with Name=DemoTask and Verify that it is shown as striked text.
+Test 10 : Revert Completed task with Name=DemoTask to pending and Verify that it is shown as expected.
+Test 11 : Remove a task with Name=DemoTask and verify that it is not found on index page.
+
+API Test cases - (qa-exercise/automation/qa-exercise-test/api/APITester.java)
+Test 1 - Verify http response code.
+Test 2 - Print all tasks.
+Test 3 - Print tasks with None category.
+Test 4 - Print tasks with status pendig.
+Test 5 - Count all tasks and verify count.
