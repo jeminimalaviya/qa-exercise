@@ -44,5 +44,14 @@ public class Category {
 		this.value = value;
 	}
 	
+	@Override
+	public String toString() {
+		String result = "";
+		result = "CategoryID : " + id +
+						"Name : " + value +
+						"Color : " + color + "\n";
+		return result;
+	}
+	
 
 }

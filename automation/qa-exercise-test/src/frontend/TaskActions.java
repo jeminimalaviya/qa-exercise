@@ -1,10 +1,13 @@
 package frontend;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -81,11 +84,12 @@ public class TaskActions {
 
 
 	// verify if task is created and visible on index page
+	@Test
 	public static boolean taskFound(int testId, WebDriver driver, String taskName) throws Exception {
 		boolean found = Boolean.valueOf(false);
 		System.out.println("Finding Task with name : " + taskName );
 		WebElement taskSelected = getTaskElementByName(driver, taskName);
-		found = (taskSelected!=null);
+		found = (taskSelected != null);
 		if(found) {
 			System.out.println("Task Found!");
 			System.out.println("Taking snap shot with task.");
@@ -99,6 +103,7 @@ public class TaskActions {
 
 
 	// verify the category and respective color of task
+	@Test
 	public static boolean taskCategoryVerified(int testId, WebDriver driver, String taskName, String category) throws Exception {
 		boolean verified = Boolean.valueOf(false);
 		System.out.println("Finding Task with name : " + taskName );
@@ -125,6 +130,7 @@ public class TaskActions {
 			System.out.println("Validating text color based on category");
 			String colorSelected = taskSelected.findElement(By.xpath(".//span")).getCssValue("color");
 			String colorSelectedHex = getHexColorByRgb(colorSelected);
+			assertEquals(colorSelectedHex.toLowerCase(), cat.getColor().toLowerCase());
 			verified = colorSelectedHex.equalsIgnoreCase(cat.getColor());
 			if(verified) {
 				System.out.println("Text color as expected!");
@@ -150,6 +156,9 @@ public class TaskActions {
 	}
 
 
+	// verify that completed task are shown as strike text
+	// verify that incomplete/pending tasks are shown as plain text
+	@Test
 	public static boolean taskCompletedVerified(int testId, WebDriver driver, String taskName, boolean completed) throws Exception {
 		boolean verified = Boolean.valueOf(false);
 		System.out.println("Finding Task with name : " + taskName );
@@ -182,6 +191,9 @@ public class TaskActions {
 		return verified;
 	}
 
+	// verify that the due date for task is shown correctly as (DD/MM/YY) for tasks with valid due date
+	// verify that the due date is shown as (None) for tasks without a valid due date
+	@Test
 	public static boolean taskDueDateVerified(int testId, WebDriver driver, String taskName, int day, int month, int year) throws Exception {
 		boolean verified = Boolean.valueOf(false);
 		System.out.println("Finding Task with name : " + taskName );
@@ -206,6 +218,10 @@ public class TaskActions {
 			int daySelected = Integer.parseInt(dueDateSelected.substring(0, 2));
 			int monthSelected = Integer.parseInt(dueDateSelected.substring(3, 5));
 			int yearSelected = 2000 + Integer.parseInt(dueDateSelected.substring(6, 8));
+			
+			assertEquals(day, daySelected);
+			assertEquals(month, monthSelected);
+			assertEquals(year, yearSelected);
 
 			verified = (day==daySelected) && (month==monthSelected) && (year==yearSelected);
 			asExpected(verified);

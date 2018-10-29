@@ -28,13 +28,25 @@ public class TestRunner {
 		WebDriver driver = new FirefoxDriver();
 		
 
-		System.out.println("Testing " + BASE_URL + "application\n");
+		System.out.println("Testing NSS-TODO list application\n");
 		// open index page of application
 		System.out.println("Launching " + BASE_URL + "index.php page\n");
 		driver.get(BASE_URL+"index.php");
+		
+		// curating tasks - removing DemoTasks from list if it exists
+		System.out.println("curating tasks list- removing DemoTasks from list if it exists");
+		if(TaskActions.taskFound(0, driver, "DemoTask")) {
+			EditTaskActions.removeTask(0, driver, "DemoTask");
+		}
+		if(TaskActions.taskFound(0, driver, "DemoTask2")) {
+			EditTaskActions.removeTask(0, driver, "DemoTask2");
+		}
+		if(TaskActions.taskFound(0, driver, "DemoTask3")) {
+			EditTaskActions.removeTask(0, driver, "DemoTask3");
+		}
 
 		// create task without category and verify
-		System.out.println("Test 1 : Create task with Name=DemoTask, Category=None, DueDate=None\nTest Run -");
+		System.out.println("\nTest 1 : Create task with Name=DemoTask, Category=None, DueDate=None\nTest Run -");
 		TaskActions.createTask(1, driver, "DemoTask", "", "");
 		System.out.println("Test 1 completed.\n");
 
